@@ -49,7 +49,7 @@ return [
     'variables_input_name' => 'variables',
 
     // Any middleware for the graphql route group
-    'middleware' => [],
+    'middleware' => ['auth'],
 
     // Any headers that will be added to the response returned by the default controller
     'headers' => [],
@@ -102,9 +102,22 @@ return [
                 'tweets' => App\GraphQL\Query\TweetsQuery::class,
             ],
             'mutation' => [
-                'createUser' => App\GraphQL\Mutation\CreateUserMutation::class,
-                'updateUser' => App\GraphQL\Mutation\UpdateUserMutation::class,
-                'deleteUser' => App\GraphQL\Mutation\DeleteUserMutation::class
+                'createUser' => App\GraphQL\Mutation\User\CreateUserMutation::class,
+                'updateUser' => App\GraphQL\Mutation\User\UpdateUserMutation::class,
+                'deleteUser' => App\GraphQL\Mutation\User\DeleteUserMutation::class,
+
+                'followUser' => App\GraphQL\Mutation\User\FollowUserMutation::class,
+                'unFollowUser' => App\GraphQL\Mutation\User\UnFollowUserMutation::class,
+
+                'createTweet' => App\GraphQL\Mutation\Tweet\CreateTweetMutation::class,
+                'updateTweet' => App\GraphQL\Mutation\Tweet\UpdateTweetMutation::class,
+                'deleteTweet' => App\GraphQL\Mutation\Tweet\DeleteTweetMutation::class,
+
+                'likeTweet' => App\GraphQL\Mutation\Tweet\LikeTweetMutation::class,
+
+                'createReply' => App\GraphQL\Mutation\Reply\CreateReplyMutation::class,
+                'updateReply' => App\GraphQL\Mutation\Reply\UpdateReplyMutation::class,
+                'deleteReply' => App\GraphQL\Mutation\Reply\DeleteReplyMutation::class
             ]
         ]
     ],

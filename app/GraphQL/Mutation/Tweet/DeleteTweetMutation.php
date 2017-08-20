@@ -1,21 +1,21 @@
 <?php
 
-namespace App\GraphQL\Mutation;
+namespace App\GraphQL\Mutation\Tweet;
 
 use GraphQL;
 use App\User;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Mutation;
 
-class DeleteUserMutation extends Mutation {
+class DeleteTweetMutation extends Mutation {
 
     protected $attributes = [
-        'name' => 'deleteUser'
+        'name' => 'deleteTweet'
     ];
 
     public function type()
     {
-        return GraphQL::type('User');
+        return GraphQL::type('Tweet');
     }
 
     public function args()
@@ -27,9 +27,9 @@ class DeleteUserMutation extends Mutation {
 
     public function resolve($root, $args)
     {
-        if( $user = User::findOrFail($args['id']) ) {
-            $user->delete();
-            return $user;
+        if( $tweet = auth()->user()->tweets()->findOrFail($args['id']) ) {
+            $tweet->delete();
+            return $tweet;
         }
 
         return null;
