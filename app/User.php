@@ -35,6 +35,14 @@ class User extends Authenticatable
     protected $casts = ['id' => 'int'];
 
     /**
+     * Accessors
+     */
+    public function getAvatarAttribute($val)
+    {
+        return is_null($val) ? asset('img/avatar-placeholder.svg') : $val;
+    }
+
+    /**
      * Relations
      */
 

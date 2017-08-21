@@ -18,3 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/t', function () {
+    return view('auth.passwords.reset')->with('token', 'sdsd');
+});

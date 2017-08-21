@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    {{ config('app.name') }}
+                    <img height="110" src="{{ asset('img/qTwitter-logo.png') }}" alt="{{ config('app.name') }}">
                 </div>
 
                 <div class="links">

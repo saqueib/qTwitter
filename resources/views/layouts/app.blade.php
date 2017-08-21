@@ -10,64 +10,78 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar ">
             <div class="container">
-                <div class="navbar-header">
-
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="{{ url('/') }}">
+                        <img src="{{ asset('img/qTwitter-logo.png') }}" alt="{{ config('app.name', 'Laravel') }}" height="38">
                     </a>
+
+                    <div class="navbar-burger burger" data-target="navMenubd-example">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </div>
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
+                <div id="navMenubd-example" class="navbar-menu">
+                    <div class="navbar-start">
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
+                    </div>
+
+                    <div class="navbar-end">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                            <div class="navbar-item">
+                                <a class="button is-primary" href="{{ route('login') }}">
+                                      <span class="icon">
+                                        <i class="fa fa-sign-in"></i>
+                                      </span>
+                                    <span>Login</span>
                                 </a>
+                            </div>
+                        @else
+                            <a class="navbar-item" href="#">
+                              <span class="icon" style="color: #333;">
+                                <i class="fa fa-bell"></i>
+                              </span>
+                            </a>
 
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
+                            <div class="navbar-item has-dropdown is-hoverable">
+                                <a class="navbar-link  is-active" href="/documentation/overview/start/">
+                                    <img src="{{ auth()->user()->avatar }}" style="margin-right: .6rem" alt="">
+                                    {{ auth()->user()->name  }}
+                                </a>
+                                <div class="navbar-dropdown is-boxed">
+                                    <a class="navbar-item " href="/documentation/overview/start/">
+                                        Profile
+                                    </a>
+                                    <a class="navbar-item " href="http://bulma.io/documentation/modifiers/syntax/">
+                                        Settings
+                                    </a>
+                                    <hr class="navbar-divider">
+                                    <a class="navbar-item " href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
+                                        Logout
+                                    </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </div>
+                            </div>
                         @endif
-                    </ul>
+                    </div>
                 </div>
+
             </div>
         </nav>
 
@@ -76,5 +90,33 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // Get all "navbar-burger" elements
+            var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+            // Check if there are any nav burgers
+            if ($navbarBurgers.length > 0) {
+
+                // Add a click event on each of them
+                $navbarBurgers.forEach(function ($el) {
+                    $el.addEventListener('click', function () {
+
+                        // Get the target from the "data-target" attribute
+                        var target = $el.dataset.target;
+                        var $target = document.getElementById(target);
+
+                        // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+                        $el.classList.toggle('is-active');
+                        $target.classList.toggle('is-active');
+
+                    });
+                });
+            }
+
+        });
+    </script>
 </body>
 </html>
