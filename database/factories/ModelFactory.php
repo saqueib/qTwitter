@@ -21,6 +21,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'username' => $faker->unique()->word . rand(1,73),
         'password' => $password ?: $password = bcrypt('secret'),
         'avatar' => 'https://randomuser.me/api/portraits/' . $faker->randomElement(['men', 'women']) . '/' . rand(1,99) . '.jpg',
+        'cover' => $faker->imageUrl(1280, 360),
         'remember_token' => str_random(10),
     ];
 });

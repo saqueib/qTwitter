@@ -29,6 +29,10 @@ class UserType extends GraphQLType {
                 'type' => Type::string(),
                 'description' => 'The name of user'
             ],
+            'username' => [
+                'type' => Type::string(),
+                'description' => 'The username of user'
+            ],
             'email' => [
                 'type' => Type::string(),
                 'description' => 'The email of user'
@@ -36,6 +40,10 @@ class UserType extends GraphQLType {
             'avatar' => [
                 'type' => Type::string(),
                 'description' => 'The avatar of user'
+            ],
+            'cover' => [
+                'type' => Type::string(),
+                'description' => 'The cover of user'
             ],
             'created_at' => [
                 'type' => Type::string(),

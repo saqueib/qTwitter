@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'avatar', 'username'
+        'name', 'email', 'password', 'avatar', 'cover', 'username'
     ];
 
     /**
@@ -40,6 +40,11 @@ class User extends Authenticatable
     public function getAvatarAttribute($val)
     {
         return is_null($val) ? asset('img/avatar-placeholder.svg') : $val;
+    }
+
+    public function getCoverAttribute($val)
+    {
+        return is_null($val) ? asset('img/cover-placeholder.jpg') : $val;
     }
 
     /**
