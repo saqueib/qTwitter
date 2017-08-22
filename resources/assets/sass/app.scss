@@ -6,3 +6,38 @@
 
 // Bootstrap
 @import "~bulma";
+
+// App Specific
+body {
+  padding-top: 3rem;
+  background-color: $white-ter;
+}
+
+// Nav
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+.sub-nav {
+  height: 4.5rem;
+  background-color: $white;
+  box-shadow: $box-shadow;
+
+  .profile-pic {
+    margin-top: -13rem;
+  }
+}
+
+// Tweet
+.tweets {
+  .level-item {
+    margin-right: 1.6rem!important;
+  }
+  .tweet {
+    .icon { margin-right: .5rem }
+  }
+}
