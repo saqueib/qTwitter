@@ -27,7 +27,7 @@
                                                    id="name"
                                                    type="text"
                                                    placeholder="Name"
-                                                   value="{{ old('name') }}">
+                                                   value="{{ old('name') }}" required v-focus>
 
                                             <span class="icon is-small is-left">
                                                 <i class="fa fa-user"></i>
@@ -39,6 +39,25 @@
                                     </div>
 
                                     <div class="field">
+                                        <label class="label" for="username">Username</label>
+                                        <div class="control has-icons-left">
+                                            <input class="input {{ $errors->has('username') ? ' is-danger' : '' }}"
+                                                   name="username"
+                                                   id="username"
+                                                   type="text"
+                                                   placeholder="Username"
+                                                   value="{{ old('username') }}" required>
+
+                                            <span class="icon is-small is-left">
+                                                <i class="fa fa-at"></i>
+                                            </span>
+                                        </div>
+                                        @if ($errors->has('username'))
+                                            <p class="help is-danger">{{ $errors->first('username') }}</p>
+                                        @endif
+                                    </div>
+
+                                    <div class="field">
                                         <label class="label" for="email">Email</label>
                                         <div class="control has-icons-left">
                                             <input class="input {{ $errors->has('email') ? ' is-danger' : '' }}"
@@ -46,7 +65,7 @@
                                                    id="email"
                                                    type="text"
                                                    placeholder="hello@email.com"
-                                                   value="{{ old('email') }}" required autofocus>
+                                                   value="{{ old('email') }}" required>
 
                                             <span class="icon is-small is-left">
                                                 <i class="fa fa-envelope"></i>
