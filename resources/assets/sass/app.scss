@@ -41,3 +41,27 @@ body {
     .icon { margin-right: .5rem }
   }
 }
+
+// Profile card
+.profile-card {
+  .card-image {
+    min-height: 97px;
+    background-color: $white-ter;
+  }
+
+  .card-content {
+    padding: .6rem 1rem 1.2rem;
+
+    .level {
+      margin-top: 1.4rem;
+    }
+  }
+
+  .image.is-circle {
+    margin-top: -2rem;
+    border: 2px solid $white;
+    width: 64px;
+    height: 64px;
+    background-color: $white-ter;
+  }
+}

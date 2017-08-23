@@ -3,10 +3,10 @@
 
 return [
 
-    // The prefix for routes
+    // The prefix for router
     'prefix' => 'graphql',
 
-    // The routes to make GraphQL request. Either a string that will apply
+    // The router to make GraphQL request. Either a string that will apply
     // to both query and mutation or an array containing the key 'query' and/or
     // 'mutation' with the according Route
     //
@@ -14,21 +14,21 @@ return [
     //
     // Same route for both query and mutation
     //
-    // 'routes' => 'path/to/query/{graphql_schema?}',
+    // 'router' => 'path/to/query/{graphql_schema?}',
     //
-    // or define each routes
+    // or define each router
     //
-    // 'routes' => [
+    // 'router' => [
     //     'query' => 'query/{graphql_schema?}',
     //     'mutation' => 'mutation/{graphql_schema?}',
     //     'mutation' => 'graphiql'
     // ]
     //
-    // you can also disable routes by setting routes to null
+    // you can also disable router by setting router to null
     //
-    // 'routes' => null,
+    // 'router' => null,
     //
-    'routes' => '{graphql_schema?}',
+    'router' => '{graphql_schema?}',
 
     // The controller to use in GraphQL request. Either a string that will apply
     // to both query and mutation or an array containing the key 'query' and/or
@@ -49,7 +49,7 @@ return [
     'variables_input_name' => 'variables',
 
     // Any middleware for the graphql route group
-    'middleware' => ['auth'],
+    'middleware' => ['graphql', 'auth'],
 
     // Any headers that will be added to the response returned by the default controller
     'headers' => [],
@@ -61,7 +61,7 @@ return [
     // Config for GraphiQL (https://github.com/graphql/graphiql).
     // To disable GraphiQL, set this to null.
     'graphiql' => [
-        'routes' => '/graphiql/{graphql_schema?}',
+        'router' => '/graphiql/{graphql_schema?}',
         'controller' => \Folklore\GraphQL\GraphQLController::class.'@graphiql',
         'middleware' => [],
         'view' => 'graphql::graphiql'

@@ -16,8 +16,15 @@
 
 <script>
     export default {
-        mounted() {
-            console.log('Component mounted.')
+        created() {
+            console.log('Component mounted.');
+
+            axios.get('/graphql?query=query+getUserNameAndId{users(first:5){id,name}}')
+                .then(function (res) {
+                    console.log(res);
+                }).catch(function (err) {
+                    console.error(err);
+                })
         }
     }
 </script>

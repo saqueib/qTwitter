@@ -27,7 +27,7 @@
                                                    id="email"
                                                    type="text"
                                                    placeholder="hello@email.com"
-                                                   value="{{ old('email') }}" required autofocus>
+                                                   value="{{ old('email') }}" required v-focus>
 
                                             <span class="icon is-small is-left">
                                                 <i class="fa fa-envelope"></i>

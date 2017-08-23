@@ -1,99 +1,90 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="bg-light is-fullheight p-t-2">
+    <section class="hero is-medium is-primary is-bold" style="background: url('../img/cover-placeholder.jpg')">
+        <div class="hero-body">
+            <div class="container">
+            </div>
+        </div>
+    </section>
+
+    <section class="sub-nav">
         <div class="container">
             <div class="columns">
                 <div class="column is-3">
-                    <div class="card">
-                        <div class="card-image">
-                            <figure class="image">
-                                <img src="/img/avatar-placeholder.svg" alt="Image">
-                            </figure>
-                        </div>
-                        <div class="card-content p-a-1">
-                            <div class="media">
-                                <div class="media-left">
-                                    <figure class="image is-64x64 is-circle">
-                                        <img src="http://bulma.io/images/placeholders/96x96.png" alt="Image">
-                                    </figure>
-                                </div>
-                                <div class="media-content">
-                                    <p class="title is-5">John Smith</p>
-                                    <p class="subtitle is-6">@johnsmith</p>
-                                </div>
-                            </div>
+                    <img class="is-circle profile-pic" src="/img/avatar-placeholder.svg" alt="Image">
+                </div>
 
-                            <nav class="level">
-                                <div class="level-item has-text-centered">
-                                    <div>
-                                        <p class="is-6 has-text-grey-light">
-                                            <small>Tweets</small>
-                                        </p>
-                                        <p class="is-4">3,456</p>
-                                    </div>
-                                </div>
-                                <div class="level-item has-text-centered">
-                                    <div>
-                                        <p class="is-6 has-text-grey-light">
-                                            <small>Following</small>
-                                        </p>
-                                        <p class="is-4">123</p>
-                                    </div>
-                                </div>
-                                <div class="level-item has-text-centered">
-                                    <div>
-                                        <p class="is-6 has-text-grey-light">
-                                            <small>Followers</small>
-                                        </p>
-                                        <p class="is-4">456K</p>
-                                    </div>
-                                </div>
-                            </nav>
+                <div class="column is-6">
+                    <div class="tabs">
+                        <ul>
+                            <li class="is-active">
+                                <a><strong>Tweets</strong>
+                                    <br>
+                                    <small>6767</small>
+                                </a>
+                            </li>
+                            <li>
+                                <a><strong>Followers</strong>
+                                    <br>
+                                    <small>7367</small>
+                                </a>
+                            </li>
+                            <li>
+                                <a><strong>Following</strong>
+                                    <br>
+                                    <small>677</small>
+                                </a>
+                            </li>
+                            <li>
+                                <a><strong>Likes</strong>
+                                    <br>
+                                    <small>67</small>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="column is-3 has-text-right">
+                    <a href="" class="button">Edit Profile</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <div class="bg-light is-fullheight">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-3">
+                    <div class="profile-info m-t-1">
+                        <p class="title is-4">John Smith</p>
+                        <p class="subtitle is-6 has-text-grey-light">@johnsmith</p>
+
+                        <div class="bio">
+                            <p>Web developer and tech freak who spends his time to chasing new technologies and trends in web & mobile development.</p>
+
+                            <div class="profile-meta m-t-1">
+                                <p class="has-text-grey-light">
+                                    <span class="icon is-small">
+                                        <i class="fa fa-map-marker"></i>
+                                    </span>
+                                    <small>New Delhi</small>
+                                </p>
+                                <p class="has-text-grey-light">
+                                    <span class="icon is-small">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    <small>Joined January 2016</small>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                    {{--user card--}}
                 </div>
 
 
                 <div class="column is-6">
                     <div class="card">
-                        <div class="card-content bg-light">
-                            <div class="media">
-                                <div class="media-left">
-                                    <figure class="image is-32x32 is-circle">
-                                        <img src="http://bulma.io/images/placeholders/96x96.png" alt="Image">
-                                    </figure>
-                                </div>
-                                <div class="media-content">
-                                    <form action="">
-                                        <div class="field">
-                                            <div class="control">
-                                                <textarea rows="3" class="textarea" placeholder="Whats happening?"></textarea>
-                                            </div>
-                                        </div>
-
-                                        <div class="level">
-                                            <div class="level-left">
-                                                <a class="has-text-grey-light">
-                                                    <span class="icon">
-                                                      <i class="fa fa-image"></i>
-                                                    </span>
-                                                </a>
-                                            </div>
-                                            <div class="level-right">
-                                                <div class="level-item">200</div>
-                                                <div class="level-item"><button class="button is-outlined is-primary">
-                                                        Tweet
-                                                    </button></div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            {{--tweeter end--}}
-                        </div>
-
                         <div class="card-content tweets">
                             <article class="media tweet" v-for="n in 10">
                                 <figure class="media-left">

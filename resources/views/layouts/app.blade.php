@@ -49,22 +49,23 @@
                             </div>
                         @else
                             <a class="navbar-item" href="#">
-                              <span class="icon" style="color: #333;">
-                                <i class="fa fa-bell"></i>
+                              <span class="icon has-text-grey-light">
+                                <i class="fa fa-bell-o"></i>
                               </span>
                             </a>
 
                             <div class="navbar-item has-dropdown is-hoverable">
                                 <a class="navbar-link  is-active" href="/documentation/overview/start/">
-                                    <img src="{{ auth()->user()->avatar }}" style="margin-right: .6rem" alt="">
-                                    {{ auth()->user()->name  }}
+                                    <img src="{{ auth()->user()->avatar }}" class="is-circle" alt="">
                                 </a>
-                                <div class="navbar-dropdown is-boxed">
-                                    <a class="navbar-item " href="/documentation/overview/start/">
+                                <div class="navbar-dropdown is-boxed is-right">
+                                    <div class="navbar-item">
+                                        <strong>
+                                            {{ auth()->user()->name }}
+                                        </strong>
+                                    </div>
+                                    <a class="navbar-item " href="/t">
                                         Profile
-                                    </a>
-                                    <a class="navbar-item " href="http://bulma.io/documentation/modifiers/syntax/">
-                                        Settings
                                     </a>
                                     <hr class="navbar-divider">
                                     <a class="navbar-item " href="{{ route('logout') }}"
