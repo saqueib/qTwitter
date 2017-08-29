@@ -35,6 +35,14 @@ class User extends Authenticatable
     protected $casts = ['id' => 'int'];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+//    protected $appends = ['getIsFollowedAttribute'];
+
+
+    /**
      * Accessors
      */
     public function getAvatarAttribute($val)
@@ -53,7 +61,7 @@ class User extends Authenticatable
 
     public function tweets()
     {
-        return $this->hasMany(Tweet::class);
+        return $this->hasMany(Tweet::class)->withCount('replies', 'likes');
     }
 
     public function likes()
@@ -74,12 +82,28 @@ class User extends Authenticatable
     public function followers()
     {
         return $this->belongsToMany(User::class, 'followers', 'follow_id', 'user_id')
+                    ->withPivot('follow_id', 'user_id')
                     ->withTimestamps();
     }
 
     public function following()
     {
         return $this->belongsToMany(User::class, 'followers', 'user_id', 'follow_id')
+                    ->withPivot('follow_id', 'user_id')
                     ->withTimestamps();
+    }
+
+    public function isFollowing($user_id = null)
+    {
+        return $this->following()
+            ->where('follow_id', $user_id ?: auth()->id() )
+            ->exists();
+    }
+
+    public function getIsFollowedAttribute()
+    {
+        return $this->followers()
+            ->where('follow_id', $this->getKey() )
+            ->exists();
     }
 }

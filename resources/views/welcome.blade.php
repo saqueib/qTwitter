@@ -83,6 +83,7 @@
                 </div>
 
                 <div class="links">
+                    <p>Login to see Twitter Like app {{ config('app.name', 'QTwitter') }} in action</p>
                     <a href="http://www.qcode.in">Visit QCode.in for tutorial</a>
                 </div>
             </div>

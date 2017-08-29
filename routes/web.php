@@ -21,7 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Me route
 Route::get('/me', ['middleware' => 'auth', function () {
-    return \App\User::withCount('followers', 'following', 'tweets')->find( auth()->user()->id );
+    return \App\User::withCount('followers', 'following', 'tweets', 'likes')->find( auth()->user()->id );
 }] );
 
 Route::get('/t', function () {

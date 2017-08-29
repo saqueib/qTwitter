@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
         $tweetsRange = $this->command->ask('How many tweets one user should get in range', '10-20');
         $repliesAndLikeRange = $this->command->ask('How many replies and likes a tweet should get.', '5-30');
 
-        $this->command->warn("Doing heave lifting....");
+        $this->command->warn("Doing heavy lifting....");
 
         $users->each(function($user) use ($tweetsRange, $repliesAndLikeRange, $users) {
             // create profile for user
@@ -50,17 +50,19 @@ class DatabaseSeeder extends Seeder
             // replies & likes on a tweet
             $tweets->each(function ($tweet) use ($repliesAndLikeRange, $user, $users) {
                 // replies
+
                 factory(\App\Reply::class, $this->rangeFromInput($repliesAndLikeRange))
                         ->create([
-                            'user_id' => $users->random()->id,
                             'tweet_id' => $tweet->id
                         ]);
 
                 // likes
-                \App\Like::firstOrCreate([
-                    'user_id' => $users->random()->id,
-                    'tweet_id' => $tweet->id
-                ]);
+                $users->random(rand(3, $users->count()))->pluck('id')->each(function ($id) use ($tweet) {
+                    \App\Like::firstOrCreate([
+                        'user_id' => $id,
+                        'tweet_id' => $tweet->id
+                    ]);
+                });
             });
         });
 
@@ -85,5 +87,16 @@ class DatabaseSeeder extends Seeder
     private function rangeFromInput($input) {
         $range = explode('-', $input);
         return rand(...$range);
+    }
+
+    /**
+     * @param $users
+     * @return mixed
+     */
+    function giveRandomUser($users)
+    {
+        $randomUser = $users->random();
+        \Log::info($randomUser->id);
+        return $randomUser;
     }
 }

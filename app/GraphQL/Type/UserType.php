@@ -145,7 +145,7 @@ class UserType extends GraphQLType {
 
     // You can also resolve any nested resource filed in same way
     protected function resolveIsFollowedField($root, $args) {
-        return $root->append('IsFollowed');
+        return $root->append('is_followed');
     }
 
     protected function resolveTweetsField($root, $args)

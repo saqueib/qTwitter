@@ -99,6 +99,10 @@ return [
         'default' => [
             'query' => [
                 'users' => App\GraphQL\Query\UsersQuery::class,
+                'user' => App\GraphQL\Query\UserQuery::class,
+
+                'followSuggestions' => App\GraphQL\Query\FollowSuggestionsQuery::class,
+
                 'tweets' => App\GraphQL\Query\TweetsQuery::class,
             ],
             'mutation' => [
