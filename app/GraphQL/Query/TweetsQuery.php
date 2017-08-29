@@ -22,17 +22,29 @@ class TweetsQuery extends Query {
         return [
             'id' => ['name' => 'id', 'type' => Type::int()],
             'first' => ['name' => 'first', 'type' => Type::int()],
+            'offset' => ['name' => 'offset', 'type' => Type::int()],
+            'username' => ['name' => 'username', 'type' => Type::string()],
         ];
     }
 
     public function resolve($root, $args)
     {
+        if(isset($args['id'])) {
+            $tweet = Tweet::withCount('replies', 'likes')->find($args['id']);
+        } else {
+            // Get all the latest tweet by followings user
+            $followingUser = auth()->user()->following()->pluck('follow_id')->toArray() + [auth()->user()->id];
+            $tweet = Tweet::withCount('replies', 'likes')->whereIn('user_id', $followingUser);
+        }
 
-        $tweet = new Tweet;
 
         // check for limit
         if( isset($args['first']) ) {
-            $tweet =  $tweet->limit($args['first'])->latest('id');
+            $tweet =  $tweet->limit($args['first'])->latest();
+        }
+
+        if( isset($args['offset']) ) {
+            $tweet =  $tweet->offset($args['offset']);
         }
 
         if(isset($args['id']))

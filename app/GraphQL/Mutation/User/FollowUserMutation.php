@@ -35,8 +35,8 @@ class FollowUserMutation extends Mutation {
     {
         $me = auth()->user();
 
-        if( ! $me->followers()->where('follow_id', $args['user_id'])->exists() ) {
-            return $me->followers()->attach($args['user_id']);
+        if( ! $me->isFollowing($args['user_id']) ) {
+            return $me->following()->attach($args['user_id']);
         }
 
         return null;

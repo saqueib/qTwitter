@@ -22,7 +22,9 @@ class UsersQuery extends Query {
         return [
             'id' => ['name' => 'id', 'type' => Type::int()],
             'email' => ['name' => 'email', 'type' => Type::string()],
+            'username' => ['name' => 'username', 'type' => Type::string()],
             'first' => ['name' => 'first', 'type' => Type::int()],
+            'offset' => ['name' => 'offset', 'type' => Type::int()],
         ];
     }
 
@@ -33,17 +35,26 @@ class UsersQuery extends Query {
 
         // check for limit
         if( isset($args['first']) ) {
-            $user =  $user->limit($args['first'])->latest('id');
+            $user =  $user->limit($args['first'])->latest();
         }
 
-        if(isset($args['id']))
-        {
-            $user = $user->where('id' , $args['id']);
+        if( isset($args['offset']) ) {
+            $user =  $user->offset($args['offset']);
         }
 
         if(isset($args['email']))
         {
             $user = $user->where('email', $args['email']);
+        }
+
+        if(isset($args['username']))
+        {
+            $user = $user->where('username', $args['username']);
+        }
+
+        if(isset($args['id']))
+        {
+            $user = $user->where('id' , $args['id']);
         }
 
         return $user->get();

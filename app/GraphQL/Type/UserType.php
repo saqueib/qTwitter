@@ -53,7 +53,29 @@ class UserType extends GraphQLType {
                 'type' => Type::string(),
                 'description' => 'Updating datetime'
             ],
-
+            // counts
+            'followers_count' => [
+                'type' => Type::int(),
+                'description' => 'count for followers'
+            ],
+            'following_count' => [
+                'type' => Type::int(),
+                'description' => 'count for following'
+            ],
+            'is_following' => [
+                'type' => Type::boolean()
+            ],
+            'is_followed' => [
+                'type' => Type::boolean()
+            ],
+            'likes_count' => [
+                'type' => Type::int(),
+                'description' => 'count for likes'
+            ],
+            'tweets_count' => [
+                'type' => Type::int(),
+                'description' => 'count for likes'
+            ],
             // Nested Resource
             'tweets' => [
                 'args' => [
@@ -97,6 +119,10 @@ class UserType extends GraphQLType {
                         'type' => Type::int(),
                         'description' => 'limit result',
                     ],
+                    'offset' => [
+                        'type' => Type::int(),
+                        'description' => 'offset result',
+                    ],
                 ],
                 'type' => Type::listOf(GraphQL::type('User')),
                 'description' => 'following User',
@@ -114,10 +140,14 @@ class UserType extends GraphQLType {
 
     protected function resolveCreatedAtField($root, $args)
     {
-        return (string) $root->created_at;
+        return (string) $root->created_at->toFormattedDateString();
     }
 
     // You can also resolve any nested resource filed in same way
+    protected function resolveIsFollowedField($root, $args) {
+        return $root->append('IsFollowed');
+    }
+
     protected function resolveTweetsField($root, $args)
     {
         $tweets = $root->tweets();
@@ -131,11 +161,12 @@ class UserType extends GraphQLType {
             $tweets =  $tweets->limit($args['first'])->latest();
         }
 
-        return $tweets->get();
-    }
+        // check for offset
+        if( isset($args['offset']) ) {
+            $tweets =  $tweets->limit($args['offset']);
+        }
 
-    protected function resolveProfileField($root, $args) {
-        return $root->profile;
+        return $tweets->get();
     }
 
     protected function resolveFollowersField($root, $args) {

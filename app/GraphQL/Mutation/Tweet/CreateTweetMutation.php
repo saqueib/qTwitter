@@ -20,7 +20,7 @@ class CreateTweetMutation extends Mutation {
     public function rules()
     {
         return [
-            'body' => 'required|max:200'
+            'body' => 'required|max:200|min:5'
         ];
     }
 

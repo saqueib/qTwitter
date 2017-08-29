@@ -41,8 +41,20 @@ class TweetType extends GraphQLType {
                 'type' => Type::string(),
                 'description' => 'Updating datetime'
             ],
+            // Counts
+            'replies_count' => [
+                'type' => Type::int(),
+                'description' => 'count of replies'
+            ],
+            'likes_count' => [
+                'type' => Type::int(),
+                'description' => 'count of likes'
+            ],
 
             // Nested Resource
+            'user' => [
+              'type' => GraphQL::type('User')
+            ],
             'replies' => [
                 'args' => [
                     'id' => [
@@ -82,37 +94,9 @@ class TweetType extends GraphQLType {
         return (string) $root->created_at->diffForHumans();
     }
 
-    // You can also resolve any nested resource filed in same way
-    protected function resolveRepliesField($root, $args)
+    protected function resolveUpdatedAtField($root, $args)
     {
-        $replies = $root->replies();
-
-        if (isset($args['id'])) {
-            $replies =  $replies->where('id', $args['id']);
-        }
-
-        // check for limit
-        if( isset($args['first']) ) {
-            $replies =  $replies->limit($args['first'])->latest();
-        }
-
-        return $replies->get();
-    }
-
-    protected function resolveLikesField($root, $args)
-    {
-        $likes = $root->likes();
-
-        if (isset($args['id'])) {
-            $likes =  $likes->where('id', $args['id']);
-        }
-
-        // check for limit
-        if( isset($args['first']) ) {
-            $likes =  $likes->limit($args['first'])->latest();
-        }
-
-        return $likes->get();
+        return (string) $root->updated_at->toDayDateTimeString();
     }
 
 }

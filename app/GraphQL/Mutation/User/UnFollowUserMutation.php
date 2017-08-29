@@ -35,8 +35,8 @@ class UnFollowUserMutation extends Mutation {
     {
         $me = auth()->user();
 
-        if( $me->followers()->where('follow_id', $args['user_id'])->exists() ) {
-            return $me->followers()->detach($args['user_id']);
+        if( $me->isFollowing($args['user_id']) ) {
+            return $me->following()->detach($args['user_id']);
         }
 
         return null;

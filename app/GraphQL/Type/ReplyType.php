@@ -1,6 +1,7 @@
 <?php
 namespace App\GraphQL\Type;
 
+use GraphQL;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Type as GraphQLType;
 
@@ -44,9 +45,11 @@ class ReplyType extends GraphQLType {
                 'type' => Type::string(),
                 'description' => 'Updating datetime'
             ],
+            'user' => [
+                'type' => GraphQL::type('User')
+            ]
         ];
     }
-
 
     // If you want to resolve the field yourself, you can declare a method
     // with the following format resolve[FIELD_NAME]Field()
