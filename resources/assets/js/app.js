@@ -3,6 +3,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import router from './router'
+import store from './store'
 
 // Global Directive
 Vue.directive('focus', {
@@ -16,7 +17,10 @@ Vue.config.devtools = true
 Vue.config.productionTip = false
 
 // Components
-Vue.component('example', require('./components/Example'));
+Vue.component('profile-card', require('./components/ProfileCard'));
+Vue.component('tweet-list', require('./components/TweetList'));
+Vue.component('follow-suggestions', require('./components/FollowSuggestions'));
+Vue.component('side-footer', require('./components/SideFooter'));
 
 // App root Component
 import App from './components/App'
@@ -25,5 +29,6 @@ import App from './components/App'
 const app = new Vue({
     el: '#app',
     router,
+    store,
     render: h => h(App)
 });

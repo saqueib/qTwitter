@@ -4,4 +4,9 @@ function slug(str) {
         .replace(/[\s_-]+/g, '-')
         .replace(/^-+|-+$/g, '');
 }
-export default slug
+
+function stripLines(str) {
+    return str.replace(/\s+/g, "").trim()
+}
+
+export default {slug, stripLines}

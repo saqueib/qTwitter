@@ -29,26 +29,32 @@
             <nav class="level">
                 <div class="level-item has-text-centered">
                     <div>
-                        <p class="is-6 has-text-grey-light">
-                            <small>Tweets</small>
-                        </p>
-                        <p class="is-4">3,456</p>
+                        <router-link :to="{ name: 'profile', params: { username: user.username }}">
+                            <p class="is-6 has-text-grey-light">
+                                <small>Tweets</small>
+                            </p>
+                            <p class="is-4">{{ user.tweets_count || 0 }}</p>
+                        </router-link>
                     </div>
                 </div>
                 <div class="level-item has-text-centered">
                     <div>
-                        <p class="is-6 has-text-grey-light">
-                            <small>Following</small>
-                        </p>
-                        <p class="is-4">123</p>
+                        <router-link :to="{ name: 'following', params: { username: user.username }}">
+                            <p class="is-6 has-text-grey-light">
+                                <small>Following</small>
+                            </p>
+                            <p class="is-4">{{ user.following_count || 0 }}</p>
+                        </router-link>
                     </div>
                 </div>
                 <div class="level-item has-text-centered">
                     <div>
-                        <p class="is-6 has-text-grey-light">
-                            <small>Followers</small>
-                        </p>
-                        <p class="is-4">456K</p>
+                        <router-link :to="{ name: 'followers', params: { username: user.username }}">
+                            <p class="is-6 has-text-grey-light">
+                                <small>Followers</small>
+                            </p>
+                            <p class="is-4">{{ user.followers_count || 0 }}</p>
+                        </router-link>
                     </div>
                 </div>
             </nav>

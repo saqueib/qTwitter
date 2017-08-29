@@ -34,23 +34,13 @@
                 </div>
                 <!--end sidebar-->
 
-                <div class="column is-6">
-                    <div class="card">
-                        <tweet-list :tweets="profileData.tweets"></tweet-list>
-                    </div>
-                    <button v-if="profileData.tweets.length < profileData.tweets_count" :class="{'is-loading': loading}" class="button m-t-1 m-b-4 is-fullwidth">
+                <div class="column is-9">
+                    <follower-list :users="following"></follower-list>
+                    <button v-if="following.length < profileData.following_count" :class="{'is-loading': loading}" class="button m-t-1 m-b-4 is-fullwidth">
                         Load more...
                     </button>
                 </div>
                 <!--end main content area-->
-
-                <div class="column is-3">
-                    <div class="is-sticky" style="top: 4.5rem;">
-                        <follow-suggestions></follow-suggestions>
-                        <side-footer></side-footer>
-                    </div>
-                </div>
-                <!--end right sidebar-->
             </div>
         </div>
     </div>
@@ -58,25 +48,33 @@
 
 <script>
     import FollowButton from "../components/FollowButton";
+    import FollowerList from "../components/FollowerList";
     import ProfileNav from "../components/ProfileNav";
     import ProfileInfo from "../components/ProfileInfo";
+
     export default {
         components: {
             ProfileInfo,
             ProfileNav,
-            FollowButton
-        },
-        name: 'Profile',
+            FollowerList,
+            FollowButton},
+        name: 'Following',
         props: ['username'],
         data() {
             return {
-                loading: false
+                loading: false,
+                profileData: {
+                    cover: '/img/cover-placeholder.jpg',
+                    avatar: '/img/avatar-placeholder.svg',
+                    profile:  {},
+                    following: []
+                }
             }
         },
         computed: {
-          profileData() {
-              return this.$store.getters.profilePage
-          }
+            following() {
+                return this.profileData.following
+            }
         },
         created() {
             this.fetchTweets();
@@ -84,7 +82,10 @@
         },
         methods: {
             fetchTweets() {
-                this.$store.dispatch('getTweetsByUsername', this.username)
+                let vm = this;
+                this.$store.dispatch('getFollowUserByUsername', {username: this.username, type: 'following'}).then(function (res) {
+                    vm.profileData = res.data.user
+                })
             }
         },
         watch: {

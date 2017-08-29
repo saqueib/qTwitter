@@ -5,14 +5,15 @@ import Router from 'vue-router'
 import Dashboard from '../Pages/Dashboard'
 import Profile from '../Pages/Profile'
 import Notification from '../Pages/Notification'
-import Followers from '../Pages/Notification'
-import Following from '../Pages/Notification'
+import Followers from '../Pages/Followers'
+import Following from '../Pages/Following'
 import Likes from '../Pages/Notification'
 
 // Use the router
 Vue.use(Router)
 
 export default new Router({
+    linkActiveClass: 'is-active',
     routes: [
         {
             path: '/',
@@ -48,7 +49,11 @@ export default new Router({
             name: 'notification',
             component: Notification
         }
-    ]
+    ],
+    // mode: 'history',
+    scrollBehavior (to, from) {
+        return { x: 0, y: 0 }
+    }
 })
 
 // https://github.com/saqueib/qreader/blob/master/src/router/index.js

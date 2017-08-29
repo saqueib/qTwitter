@@ -1,6 +1,6 @@
 // All of the utilities
-import http from 'http';
-import str from 'str';
+import http from './http';
+import str from './str';
 
 export {
     http,
