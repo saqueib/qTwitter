@@ -11,6 +11,25 @@
   border-radius: 50%
 }
 
+.is-sticky {
+  position: sticky;
+  top: 1rem;
+}
+
+.card-equal-height {
+  height: 230px;
+}
+
+// prevent scroll on popup
+.popup-shown {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top:0;
+  overflow-y: scroll; /* render disabled scroll bar to keep the same width */
+}
+
 // spacing helper
 $spacer: 1rem;
 $spacer-x: $spacer;
