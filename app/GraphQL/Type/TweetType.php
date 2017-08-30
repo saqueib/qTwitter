@@ -7,81 +7,35 @@ use Folklore\GraphQL\Support\Type as GraphQLType;
 
 class TweetType extends GraphQLType {
 
-    protected $attributes = [
-        'name' => 'Tweet',
-        'description' => 'A Tweet'
-    ];
-
-    /*
-       * Uncomment following line to make the type input object.
-       * http://graphql.org/learn/schema/#input-types
-       */
-    // protected $inputObject = true;
-
     public function fields()
     {
         return [
             'id' => [
-                'type' => Type::nonNull(Type::int()),
-                'description' => 'The id of the tweet'
+                'type' => Type::nonNull(Type::int())
             ],
             'body' => [
-                'type' => Type::nonNull(Type::string()),
-                'description' => 'Body of of a tweet'
+                'type' => Type::nonNull(Type::string())
             ],
             'user_id' => [
-                'type' => Type::nonNull(Type::int()),
-                'description' => 'The id of the user of reply'
+                'type' => Type::nonNull(Type::int())
             ],
             'created_at' => [
-                'type' => Type::string(),
-                'description' => 'Creation datetime'
+                'type' => Type::string()
             ],
             'updated_at' => [
-                'type' => Type::string(),
-                'description' => 'Updating datetime'
+                'type' => Type::string()
             ],
             // Counts
             'replies_count' => [
-                'type' => Type::int(),
-                'description' => 'count of replies'
+                'type' => Type::int()
             ],
             'likes_count' => [
-                'type' => Type::int(),
-                'description' => 'count of likes'
+                'type' => Type::int()
             ],
 
             // Nested Resource
             'user' => [
               'type' => GraphQL::type('User')
-            ],
-            'replies' => [
-                'args' => [
-                    'id' => [
-                        'type' => Type::int(),
-                        'description' => 'id of the reply',
-                    ],
-                    'first' => [
-                        'type' => Type::int(),
-                        'description' => 'limit result',
-                    ],
-                ],
-                'type' => Type::listOf(GraphQL::type('Reply')),
-                'description' => 'reply description',
-            ],
-            'likes' => [
-                'args' => [
-                    'id' => [
-                        'type' => Type::int(),
-                        'description' => 'id of the like',
-                    ],
-                    'first' => [
-                        'type' => Type::int(),
-                        'description' => 'limit result',
-                    ],
-                ],
-                'type' => Type::listOf(GraphQL::type('Like')),
-                'description' => 'A Like type',
             ]
         ];
     }
@@ -89,6 +43,11 @@ class TweetType extends GraphQLType {
 
     // If you want to resolve the field yourself, you can declare a method
     // with the following format resolve[FIELD_NAME]Field()
+    protected function resolveBodyField($root, $args)
+    {
+        return nl2br($root->body);
+    }
+
     protected function resolveCreatedAtField($root, $args)
     {
         return (string) $root->created_at->diffForHumans();

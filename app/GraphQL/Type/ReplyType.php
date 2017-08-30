@@ -7,43 +7,26 @@ use Folklore\GraphQL\Support\Type as GraphQLType;
 
 class ReplyType extends GraphQLType {
 
-    protected $attributes = [
-        'name' => 'Reply',
-        'description' => 'A reply for a Tweet'
-    ];
-
-    /*
-       * Uncomment following line to make the type input object.
-       * http://graphql.org/learn/schema/#input-types
-       */
-    // protected $inputObject = true;
-
     public function fields()
     {
         return [
             'id' => [
-                'type' => Type::nonNull(Type::int()),
-                'description' => 'The id of reply'
+                'type' => Type::nonNull(Type::int())
             ],
             'body' => [
-                'type' => Type::nonNull(Type::string()),
-                'description' => 'Body of of a reply'
+                'type' => Type::nonNull(Type::string())
             ],
             'user_id' => [
-                'type' => Type::nonNull(Type::int()),
-                'description' => 'The id of the user of reply'
+                'type' => Type::nonNull(Type::int())
             ],
             'tweet_id' => [
-                'type' => Type::nonNull(Type::int()),
-                'description' => 'The id of the tweet which receives reply'
+                'type' => Type::nonNull(Type::int())
             ],
             'created_at' => [
-                'type' => Type::string(),
-                'description' => 'Creation datetime'
+                'type' => Type::string()
             ],
             'updated_at' => [
-                'type' => Type::string(),
-                'description' => 'Updating datetime'
+                'type' => Type::string()
             ],
             'user' => [
                 'type' => GraphQL::type('User')
@@ -53,7 +36,7 @@ class ReplyType extends GraphQLType {
 
     // If you want to resolve the field yourself, you can declare a method
     // with the following format resolve[FIELD_NAME]Field()
-    protected function resolveEmailField($root, $args)
+    protected function resolveBodyField($root, $args)
     {
         return nl2br($root->body);
     }

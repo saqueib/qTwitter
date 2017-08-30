@@ -7,55 +7,35 @@ use Folklore\GraphQL\Support\Type as GraphQLType;
 
 class ProfileType extends GraphQLType {
 
-    protected $attributes = [
-        'name' => 'Profile',
-        'description' => 'A user profile'
-    ];
-
-    /*
-       * Uncomment following line to make the type input object.
-       * http://graphql.org/learn/schema/#input-types
-       */
-    // protected $inputObject = true;
-
     public function fields()
     {
         return [
             'id' => [
-                'type' => Type::nonNull(Type::int()),
-                'description' => 'The id of the user'
+                'type' => Type::nonNull(Type::int())
             ],
             'bio' => [
-                'type' => Type::string(),
-                'description' => 'The bio of user'
+                'type' => Type::string()
             ],
             'designation' => [
-                'type' => Type::string(),
-                'description' => 'The designation of user'
+                'type' => Type::string()
             ],
             'company' => [
-                'type' => Type::string(),
-                'description' => 'The company of user'
+                'type' => Type::string()
             ],
             'city' => [
-                'type' => Type::string(),
-                'description' => 'The city of user'
+                'type' => Type::string()
             ],
             'country' => [
-                'type' => Type::string(),
-                'description' => 'The country of user'
+                'type' => Type::string()
             ],
             'dob' => [
-                'type' => Type::string(),
-                'description' => 'The date of birth of user'
+                'type' => Type::string()
             ],
             'created_at' => [
-                'type' => Type::string(),
-                'description' => 'Creation datetime'
+                'type' => Type::string()
             ],
             'updated_at' => [
                 'type' => Type::string(),
-                'description' => 'Updating datetime'
             ]
         ];
     }

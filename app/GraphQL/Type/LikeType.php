@@ -7,52 +7,30 @@ use Folklore\GraphQL\Support\Type as GraphQLType;
 
 class LikeType extends GraphQLType {
 
-    protected $attributes = [
-        'name' => 'Like',
-        'description' => 'A user like on a tweet'
-    ];
-
-    /*
-       * Uncomment following line to make the type input object.
-       * http://graphql.org/learn/schema/#input-types
-       */
-    // protected $inputObject = true;
-
     public function fields()
     {
         return [
             'id' => [
-                'type' => Type::nonNull(Type::int()),
-                'description' => 'The id of like'
+                'type' => Type::nonNull(Type::int())
             ],
             'user_id' => [
-                'type' => Type::nonNull(Type::int()),
-                'description' => 'The id of the user'
+                'type' => Type::nonNull(Type::int())
             ],
             'tweet_id' => [
-                'type' => Type::nonNull(Type::int()),
-                'description' => 'The id of the tweet'
+                'type' => Type::nonNull(Type::int())
             ],
             'created_at' => [
-                'type' => Type::string(),
-                'description' => 'Creation datetime'
+                'type' => Type::string()
             ],
             'updated_at' => [
-                'type' => Type::string(),
-                'description' => 'Updating datetime'
+                'type' => Type::string()
             ],
 
             // Nested Resource
             'user' => [
-                'type' => GraphQL::type('User'),
-                'description' => 'A User type',
+                'type' => GraphQL::type('User')
             ]
         ];
-    }
-
-    protected function resolveUserField($root, $args)
-    {
-        return $root->user;
     }
 
     protected function resolveCreatedAtField($root, $args)
