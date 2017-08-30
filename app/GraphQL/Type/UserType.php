@@ -49,10 +49,48 @@ class UserType extends GraphQLType {
             ],
             'is_following' => [
                 'type' => Type::boolean()
+            ],
+            'is_followed' => [
+                'type' => Type::boolean()
+            ],
+            'tweets' => [
+                'args' => [
+                    'id' => [
+                        'type' => Type::int(),
+                    ],
+                    'first' => [
+                        'type' => Type::int(),
+                    ],
+                ],
+                'type' => Type::listOf(GraphQL::type('Tweet'))
+            ],
+            'profile' => [
+                'type' => GraphQL::type('Profile')
+            ],
+            'followers' => [
+                'args' => [
+                    'id' => [
+                        'type' => Type::int(),
+                    ],
+                    'first' => [
+                        'type' => Type::int(),
+                    ],
+                ],
+                'type' => Type::listOf(GraphQL::type('User'))
+            ],
+            'following' => [
+                'args' => [
+                    'id' => [
+                        'type' => Type::int(),
+                    ],
+                    'first' => [
+                        'type' => Type::int(),
+                    ],
+                ],
+                'type' => Type::listOf(GraphQL::type('User'))
             ]
         ];
     }
-
 
     // If you want to resolve the field yourself, you can declare a method
     // with the following format resolve[FIELD_NAME]Field()

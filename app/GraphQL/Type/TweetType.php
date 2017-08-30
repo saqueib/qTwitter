@@ -32,10 +32,31 @@ class TweetType extends GraphQLType {
             'likes_count' => [
                 'type' => Type::int()
             ],
-
             // Nested Resource
             'user' => [
               'type' => GraphQL::type('User')
+            ],
+            'replies' => [
+                'args' => [
+                    'id' => [
+                        'type' => Type::int(),
+                    ],
+                    'first' => [
+                        'type' => Type::int(),
+                    ],
+                ],
+                'type' => Type::listOf(GraphQL::type('Reply')),
+            ],
+            'likes' => [
+                'args' => [
+                    'id' => [
+                        'type' => Type::int(),
+                    ],
+                    'first' => [
+                        'type' => Type::int(),
+                    ],
+                ],
+                'type' => Type::listOf(GraphQL::type('Like')),
             ]
         ];
     }
