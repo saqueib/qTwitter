@@ -45,5 +45,4 @@ class ReplyType extends GraphQLType {
     {
         return (string) $root->created_at->diffForHumans();
     }
-
 }

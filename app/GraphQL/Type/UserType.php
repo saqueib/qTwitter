@@ -50,9 +50,6 @@ class UserType extends GraphQLType {
             'is_following' => [
                 'type' => Type::boolean()
             ],
-            'is_followed' => [
-                'type' => Type::boolean()
-            ],
             'tweets' => [
                 'args' => [
                     'id' => [
@@ -102,5 +99,9 @@ class UserType extends GraphQLType {
     protected function resolveCreatedAtField($root, $args)
     {
         return (string) $root->created_at->toFormattedDateString();
+    }
+
+    protected function resolveIsFollowingField($root) {
+        return auth()->user()->isFollowing($root->id);
     }
 }

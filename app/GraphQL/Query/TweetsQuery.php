@@ -30,11 +30,11 @@ class TweetsQuery extends Query {
     public function resolve($root, $args)
     {
         if(isset($args['id'])) {
-            $tweet = Tweet::withCount('replies', 'likes')->find($args['id']);
+            $tweet = Tweet::withCount('replies', 'likes')->with('replies')->find($args['id']);
         } else {
             // Get all the latest tweet by followings user
             $followingUser = auth()->user()->following()->pluck('follow_id')->toArray() + [auth()->user()->id];
-            $tweet = Tweet::withCount('replies', 'likes')->whereIn('user_id', $followingUser);
+            $tweet = Tweet::with('user')->withCount('replies', 'likes')->whereIn('user_id', $followingUser);
         }
 
 

@@ -32,7 +32,7 @@ class UserQuery extends Query {
 
         $fields = $info->getFieldSelection($depth = 3);
 
-        $user = User::query();
+        $user = User::with('tweets', 'tweets.user');
 
         // check for fields
         foreach ($fields as $field => $keys) {
@@ -69,11 +69,6 @@ class UserQuery extends Query {
             $user = $user->where('id' , $args['id']);
         }
 
-        $user = $user->first();
-
-        // check is current user following it
-        $user->is_following = auth()->user()->isFollowing($user->id);
-
-        return $user;
+        return $user->first();
     }
 }

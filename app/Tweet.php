@@ -24,7 +24,7 @@ class Tweet extends Model
 
     public function replies()
     {
-        return $this->hasMany(Reply::class)->latest();
+        return $this->hasMany(Reply::class)->with('user')->latest();
     }
 
     public function likes()
