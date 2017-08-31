@@ -28,6 +28,12 @@ class ReplyType extends GraphQLType {
             'updated_at' => [
                 'type' => Type::string()
             ],
+            'replies_count' => [
+                'type' => Type::int()
+            ],
+            'likes_count' => [
+                'type' => Type::int()
+            ],
             'user' => [
                 'type' => GraphQL::type('User')
             ]

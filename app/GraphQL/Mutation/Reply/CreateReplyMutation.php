@@ -2,6 +2,7 @@
 
 namespace App\GraphQL\Mutation\Reply;
 
+use App\Reply;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Mutation;
@@ -38,9 +39,9 @@ class CreateReplyMutation extends Mutation {
         $data = [
             'body' => $args['body'],
             'tweet_id' => $args['tweet_id'],
-            'user_id' => auth()->id,
+            'user_id' => auth()->user()->id
         ];
 
-        return Tweet::replies()->create($data);
+        return Reply::create($data);
     }
 }
