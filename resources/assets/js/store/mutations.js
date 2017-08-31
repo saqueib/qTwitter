@@ -63,6 +63,13 @@ export const PREPEND_TWEET_IN_FEED = (state, tweet) => {
     state.me.tweets_count++;
 }
 
+// Prepend Reply in a Tweet
+export const PREPEND_REPLY_IN_TWEET = (state, reply) => {
+    state.tweetDetail.replies.unshift(reply);
+
+    state.tweetDetail.replies_count++;
+}
+
 // Delete a tweet by id
 export const DELETE_TWEET = (state, tweetId) => {
     // find tweet
@@ -73,6 +80,11 @@ export const DELETE_TWEET = (state, tweetId) => {
     if( index !== -1 ) {
         state.feed.splice(index, 1);
     }
+}
+
+// Delete reply
+export const DELETE_REPLY = (state, index) => {
+    state.tweetDetail.replies.splice(index, 1);
 }
 
 // Toggle loading

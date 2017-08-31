@@ -136,10 +136,11 @@ export const getTweetDetails = ({commit}, options) => {
             replies_count,
             likes_count,
             user{
+                id,
                 username,
                 name,
                 avatar,
-                is_followed
+                is_following
             },
             replies(${to}${from}){
                 body,
@@ -266,6 +267,34 @@ export const postTweet = ({ commit }, body) => {
     return http.get( '/graphql?query=' + mutation ).then((res) => {
         if(res.data.data.createTweet) {
             commit('PREPEND_TWEET_IN_FEED', res.data.data.createTweet);
+        }
+
+        return res.data;
+    });
+}
+
+// Post Reply
+export const postReply = ({ commit }, data) => {
+    let mutation = `mutation {
+        createReply(body:"${data.body}", tweet_id: ${data.id})
+        {
+            id,
+            body,
+            created_at,
+            replies_count,
+            likes_count,
+            user{
+                id,
+                username,
+                name,
+                avatar
+            }
+        }
+    }`;
+
+    return http.get( '/graphql?query=' + mutation ).then((res) => {
+        if(res.data.data.createReply) {
+            commit('PREPEND_REPLY_IN_TWEET', res.data.data.createReply);
         }
 
         return res.data;

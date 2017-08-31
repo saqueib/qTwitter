@@ -31,7 +31,7 @@
                                </article>
                            </div>
                            <div class="level-right">
-                               <follow-button class="is-outlined" :user="tweetDetails.user" :following="tweetDetails.user.is_followed"></follow-button>
+                               <follow-button class="is-outlined" :user="tweetDetails.user" :following="tweetDetails.user.is_following"></follow-button>
                            </div>
                        </div>
                     </div>
@@ -45,9 +45,9 @@
                             <div class="level-right">
                                 <div class="level-item has-text-grey-light">
                                     <span class="icon is-small">
-                                        <i class="fa fa-comment-o"></i>
+                                        <i class="fa fa-reply"></i>
                                     </span>
-                                    <small> {{ tweetDetails.replies_count || 0 }}</small>
+                                    <small> {{ tweetDetails.replies.length || 0 }}</small>
                                 </div>
 
                                 <div class="level-item has-text-grey-light">
@@ -61,10 +61,10 @@
                     </div>
 
                     <div class="modal-footer">
-                        <tweet-box placeholder="Reply your thoughts..." btn-text="Reply" :user="me" class="m-b-1"></tweet-box>
+                        <tweet-box placeholder="Reply your thoughts..." btn-text="Reply" :user="me" :is-reply="true" class="m-b-1"></tweet-box>
 
                         <div class="replies">
-                            <article v-for="reply in tweetDetails.replies" class="media reply p-l-1">
+                            <article v-for="(reply, index) in tweetDetails.replies" class="media reply p-l-1">
                                 <figure class="media-left">
                                     <p class="image is-64x64 is-circle">
                                         <img :src="reply.user.avatar">
@@ -89,7 +89,7 @@
                                     </div>
                                 </div>
                                 <div class="media-right">
-                                    <button v-if="reply.user.username === me.username" class="delete"></button>
+                                    <button @click="remove(index)" v-if="reply.user.username === me.username" class="delete"></button>
                                 </div>
                             </article>
                         </div>
@@ -111,10 +111,7 @@
         props: ['tweetId'],
         data() {
             return {
-                loading: true,
-                nextOffset: 26,
-                perPage: 26,
-                noMoreReplies: false
+                loading: true
             }
         },
         computed: {
@@ -149,19 +146,10 @@
                     vm.loading = false
                 })
             },
-            loadMore() {
-                let vm = this;
-                vm.loading = true;
-                this.$store.dispatch('getTweetDetails', {id: this.tweetId, offset: this.nextOffset})
-                    .then(function (res) {
-                        vm.loading = false;
-                        console.log(res.data);
-                        if( res.data.tweets.length === vm.perPage ) {
-                            vm.nextOffset = vm.nextOffset+vm.perPage;
-                        } else {
-                            vm.noMoreTweets = true;
-                        }
-                });
+            remove(index) {
+                if( window.confirm('Are you sure want to delete this reply?') ) {
+                    this.$store.commit('DELETE_REPLY', index)
+                }
             },
             goToProfile(username) {
                 this.$emit('close');

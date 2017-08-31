@@ -26,7 +26,7 @@
                         <div class="level-right">
                             <div class="level-item has-text-grey">{{ maxLength - body.length }}</div>
                             <div class="level-item">
-                                <button @click.prevent="submitTweet" class="button is-outlined is-primary" :class="{'is-loading': loading }">
+                                <button @click.prevent="submit" class="button is-outlined is-primary" :class="{'is-loading': loading }">
                                     {{ btnText }}
                                 </button>
                             </div>
@@ -49,6 +49,11 @@
             btnText: {default: 'Tweet'},
             placeholder: {default: 'Whats happening?'},
         },
+        computed: {
+            tweetId() {
+                return this.$store.getters.tweetDetail.id;
+            },
+        },
         data() {
             return {
                 body: '',
@@ -60,17 +65,27 @@
           console.log('TweetBox Component created.')
         },
         methods: {
-            submitTweet() {
+            displayError(res) {
+                if(res.errors) {
+                    this.errorMsg = res.errors[0].validation.body[0];
+                } else {
+                    this.body = this.errorMsg = '';
+                }
+            },
+            submit() {
                 this.loading = true
-                this.$store.dispatch('postTweet', this.body).then((res) => {
-                    this.loading = false;
 
-                    if(res.errors) {
-                        this.errorMsg = res.errors[0].validation.body[0];
-                    } else {
-                        this.body = this.errorMsg = '';
-                    }
-                })
+                if(this.isReply) {
+                    this.$store.dispatch('postReply', { body: this.body, id: this.tweetId}).then((res) => {
+                        this.loading = false;
+                        this.displayError(res)
+                    })
+                } else {
+                    this.$store.dispatch('postTweet', this.body).then((res) => {
+                        this.loading = false;
+                        this.displayError(res)
+                    })
+                }
             }
         }
     }
