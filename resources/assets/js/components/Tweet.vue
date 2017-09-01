@@ -3,10 +3,11 @@
         <figure class="media-left">
             <p class="image is-64x64 is-circle">
                 <router-link :to="{ name: 'profile', params: { username: tweetData.user.username }}">
-                <img :src="tweetData.user.avatar">
+                    <img :src="tweetData.user.avatar">
                 </router-link>
             </p>
         </figure>
+
         <div class="media-content">
             <div class="content">
                 <p class="tweet-meta">
@@ -18,20 +19,16 @@
 
                     <small class="has-text-grey-light">{{ tweetData.created_at }}</small>
                 </p>
-                <div class="tweet-body has-text-grey" @click="tweetDetail" v-html="tweetData.body">
-                </div>
+
+                <div class="tweet-body has-text-grey" @click="tweetDetail" v-html="tweetData.body"></div>
             </div>
+
             <nav class="level is-mobile">
                 <div class="level-left">
                     <a class="level-item has-text-grey-light">
                         <span class="icon is-small"><i class="fa fa-comment-o"></i></span> <small> {{ tweetData.replies_count }}</small>
                     </a>
-                    <!--<a class="level-item has-text-grey-light">-->
-                        <!--<span class="icon is-small"><i class="fa fa-reply"></i></span> <small> 12</small>-->
-                    <!--</a>-->
-                    <!--<a class="level-item has-text-grey-light">-->
-                        <!--<span class="icon is-small"><i class="fa fa-retweet"></i></span> <small> 34</small>-->
-                    <!--</a>-->
+
                     <a class="level-item has-text-grey-light">
                         <span class="icon is-small"><i class="fa fa-heart"></i></span> <small> {{ tweetData.likes_count }}</small>
                     </a>

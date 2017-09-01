@@ -1,18 +1,22 @@
 // axios instance
 import axios from 'axios'
 
+// Laravel CSRF token
 let token = document.head.querySelector('meta[name="csrf-token"]');
 
+// Create an Instance
 const instance = axios.create({
     // change this url to your api
     baseURL: '//localhost:8000/',
+
+    // any other headers you want to include
     headers: {
         'X-Requested-With': 'XMLHttpRequest',
         'X-CSRF-TOKEN': token ? token.content : null
     }
 });
 
-// Error interceptor
+// Error interceptor can be used for global error handling
 instance.interceptors.response.use(function (response) {
     // Do something with response data
     return response;

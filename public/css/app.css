@@ -10469,6 +10469,18 @@ body {
           box-shadow: 0px 6px 4px rgba(136, 136, 136, 0.11);
 }
 
+.sub-nav {
+  height: 4rem;
+  background-color: white;
+  -webkit-box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+          box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+}
+
+.sub-nav .profile-pic {
+  margin-top: -11rem;
+  width: 90%;
+}
+
 .is-loading {
   position: relative;
   cursor: default;
@@ -10498,18 +10510,6 @@ body {
   left: calc(50% - (1em / 2));
   top: calc(50% - (1em / 2));
   position: absolute !important;
-}
-
-.sub-nav {
-  height: 4rem;
-  background-color: white;
-  -webkit-box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
-          box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
-}
-
-.sub-nav .profile-pic {
-  margin-top: -11rem;
-  width: 90%;
 }
 
 .tweets {
@@ -10612,7 +10612,7 @@ a.button-close {
   position: fixed;
   top: 1rem;
   right: 1rem;
-  background-color: #3eb148;
+  background-color: #ff3860;
   -webkit-transition: -webkit-transform ease 0.3s;
   transition: -webkit-transform ease 0.3s;
   transition: transform ease 0.3s;
@@ -10620,7 +10620,7 @@ a.button-close {
 }
 
 a.button-close:hover {
-  background-color: #23d160;
+  background-color: #ff0537;
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg);
 }

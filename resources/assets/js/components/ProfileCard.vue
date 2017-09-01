@@ -37,6 +37,7 @@
                         </router-link>
                     </div>
                 </div>
+
                 <div class="level-item has-text-centered">
                     <div>
                         <router-link :to="{ name: 'following', params: { username: user.username }}">
@@ -47,6 +48,7 @@
                         </router-link>
                     </div>
                 </div>
+
                 <div class="level-item has-text-centered">
                     <div>
                         <router-link :to="{ name: 'followers', params: { username: user.username }}">
@@ -66,16 +68,8 @@
     export default {
         name: 'ProfileCard',
         props: ['user'],
-        data() {
-            return {
-
-            }
-        },
         created() {
           console.log('ProfileCard Component created.')
-        },
-        methods: {
-
         }
     }
 </script>

@@ -60,6 +60,7 @@
     import FollowButton from "../components/FollowButton";
     import ProfileNav from "../components/ProfileNav";
     import ProfileInfo from "../components/ProfileInfo";
+
     export default {
         components: {
             ProfileInfo,
@@ -88,7 +89,7 @@
             }
         },
         watch: {
-            '$route' (to) {
+            '$route' () {
                 this.fetchTweets();
             }
         }

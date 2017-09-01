@@ -35,7 +35,7 @@
                 </form>
             </div>
         </div>
-        <!--tweeter end-->
+        <!--tweet box end-->
     </div>
 </template>
 

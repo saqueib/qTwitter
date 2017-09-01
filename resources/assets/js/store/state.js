@@ -1,4 +1,4 @@
-// State of app
+// State of your app
 const state = {
     me: {},
     feed: [],

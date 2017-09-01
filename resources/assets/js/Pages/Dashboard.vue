@@ -15,6 +15,7 @@
                         <tweet-box :user="me"></tweet-box>
                         <tweet-list :tweets="tweets"></tweet-list>
                     </div>
+
                     <button :disabled="noMoreTweets" @click.prevent="loadMore" :class="{'is-loading': loading}" class="button m-t-1 m-b-1 is-fullwidth">
                         {{ noMoreTweets ? 'No more tweets...' : 'Load more...' }}
                     </button>
@@ -78,7 +79,7 @@
             }
         },
         watch: {
-            '$route' (to) {
+            '$route' () {
                 this.fetchFeed();
             }
         }

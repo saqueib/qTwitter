@@ -11,6 +11,7 @@
                        <div class="level">
                            <div class="level-left">
                                <article class="media">
+
                                    <figure class="media-left">
                                        <a href="" class="has-text-dark" @click.prevent="goToProfile(tweetDetails.user.username)">
                                            <p class="image is-circle is-64x64">
@@ -18,6 +19,7 @@
                                            </p>
                                        </a>
                                    </figure>
+
                                    <div class="media-content">
                                        <div class="content">
                                            <p>
@@ -28,6 +30,7 @@
                                            </p>
                                        </div>
                                    </div>
+
                                </article>
                            </div>
                            <div class="level-right">
@@ -35,9 +38,12 @@
                            </div>
                        </div>
                     </div>
+                    <!--end tweet header-->
 
                     <div class="modal-body">
+
                         <div class="tweet-body is-size-4" v-html="tweetDetails.body"></div>
+
                         <div class="tweet-meta m-t-1 level">
                             <div class="level-left">
                                 <p class="has-text-grey-light">{{ tweetDetails.updated_at }} &bullet; {{ tweetDetails.created_at }} </p>
@@ -59,6 +65,7 @@
                             </div>
                         </div>
                     </div>
+                    <!--end modal body-->
 
                     <div class="modal-footer">
                         <tweet-box placeholder="Reply your thoughts..." btn-text="Reply" :user="me" :is-reply="true" class="m-b-1"></tweet-box>
@@ -85,7 +92,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="media-right">
@@ -94,6 +100,8 @@
                             </article>
                         </div>
                     </div>
+                    <!--end modal footer-->
+
                 </div>
             </div>
         </div>

@@ -89,7 +89,7 @@
             }
         },
         watch: {
-            '$route' (to) {
+            '$route' () {
                 this.fetchTweets();
             }
         }

@@ -8,15 +8,16 @@
 
             <div class="profile-meta m-t-1">
                 <p>
-                                    <span class="icon is-small">
-                                        <i class="fa fa-map-marker"></i>
-                                    </span>
+                    <span class="icon is-small">
+                        <i class="fa fa-map-marker"></i>
+                    </span>
                     <small class="has-text-grey-light">{{ user.profile.city }} {{ user.profile.country }}</small>
                 </p>
+
                 <p>
-                                    <span class="icon is-small">
-                                        <i class="fa fa-calendar"></i>
-                                    </span>
+                    <span class="icon is-small">
+                        <i class="fa fa-calendar"></i>
+                    </span>
                     <small class="has-text-grey-light">Joined {{ user.created_at }}</small>
                 </p>
             </div>

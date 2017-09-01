@@ -23,6 +23,18 @@ body {
   box-shadow: 0px 6px 4px rgba(136, 136, 136, 0.11);
 }
 
+.sub-nav {
+  height: 4rem;
+  background-color: $white;
+  box-shadow: $box-shadow;
+
+  .profile-pic {
+    margin-top: -11rem;
+    width: 90%;
+  }
+}
+
+// Loading state
 .is-loading {
   position: relative;
   cursor: default;
@@ -49,17 +61,6 @@ body {
     left: calc(50% - (1em / 2));
     top: calc(50% - (1em / 2));
     position: absolute !important;
-  }
-}
-
-.sub-nav {
-  height: 4rem;
-  background-color: $white;
-  box-shadow: $box-shadow;
-
-  .profile-pic {
-    margin-top: -11rem;
-    width: 90%;
   }
 }
 
@@ -161,11 +162,11 @@ a.button-close {
   position: fixed;
   top: 1rem;
   right: 1rem;
-  background-color: $turquoise;
+  background-color: $danger;
   transition: transform ease 0.3s;
 
   &:hover {
-    background-color: $green;
+    background-color: darken($danger, 10);
     transform: rotate(90deg);
   }
 }
@@ -205,7 +206,7 @@ a.button-close {
   transform: scale(1.1);
 }
 
-// Reply body
+// Tweet Replies
 .replies {
   .reply {
     border-top: none;

@@ -1,3 +1,4 @@
+// String helpers
 function slug(str) {
     return str.toLowerCase()
         .replace(/[^\w\s-]/g, '')

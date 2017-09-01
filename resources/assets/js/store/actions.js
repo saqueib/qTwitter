@@ -124,6 +124,7 @@ export const getTweetsByUsername = ({commit}, username) => {
 
 // Get tweet details with replies
 export const getTweetDetails = ({commit}, options) => {
+
     let from = options.offset ?  ',offset:' + options.offset : '';
     let to = options.limit ? 'first:' + options.limit :  'first:26';
 
@@ -165,6 +166,7 @@ export const getTweetDetails = ({commit}, options) => {
 
 // Get followers for a user by username
 export const getFollowUserByUsername = ({commit}, options = {}) => {
+
     let userType = options.type ? options.type : 'followers';
 
     let from = options.offset ?  ',offset:' + options.offset : '';
@@ -215,6 +217,7 @@ export const getFollowUserByUsername = ({commit}, options = {}) => {
 
 // Follow a user
 export const followUser = ({commit}, userId) => {
+
     let mutation = `mutation {
         followUser(user_id: ${userId})
         {
@@ -231,6 +234,7 @@ export const followUser = ({commit}, userId) => {
 
 // Unfollow a user
 export const unFollowUser = ({commit}, userId) => {
+
     let mutation = `mutation {
         unFollowUser(user_id: ${userId})
         {
@@ -247,6 +251,7 @@ export const unFollowUser = ({commit}, userId) => {
 
 // Post Tweet
 export const postTweet = ({ commit }, body) => {
+
     let mutation = `mutation {
         createTweet(body:"${body}")
         {
@@ -275,6 +280,7 @@ export const postTweet = ({ commit }, body) => {
 
 // Post Reply
 export const postReply = ({ commit }, data) => {
+
     let mutation = `mutation {
         createReply(body:"${data.body}", tweet_id: ${data.id})
         {

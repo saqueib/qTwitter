@@ -38,6 +38,7 @@ export const DECREMENT_FOLLOW_USER_COUNT = (state) => {
 export const REMOVE_FROM_FOLLOW_SUGGESTION = (state, user) => {
     let index = state.followSuggestions.indexOf(user);
 
+    // remove after 1 second
     setTimeout(function () {
         state.followSuggestions.splice(index, 1);
     }, 1000);
@@ -46,7 +47,6 @@ export const REMOVE_FROM_FOLLOW_SUGGESTION = (state, user) => {
 // Add Tweets to feed
 export const ADD_TWEETS_IN_FEED = (state, tweets) => {
     state.feed = tweets;
-
 }
 
 // Append Tweets to feed
@@ -59,14 +59,12 @@ export const APPEND_TWEETS_IN_FEED = (state, tweets) => {
 // Prepend Tweets to feed
 export const PREPEND_TWEET_IN_FEED = (state, tweet) => {
     state.feed.unshift(tweet);
-
     state.me.tweets_count++;
 }
 
 // Prepend Reply in a Tweet
 export const PREPEND_REPLY_IN_TWEET = (state, reply) => {
     state.tweetDetail.replies.unshift(reply);
-
     state.tweetDetail.replies_count++;
 }
 

@@ -22,7 +22,6 @@
                         <a v-if="profileData.id === $parent.me.id" href="" class="button">Edit Profile</a>
                         <follow-button :following.sync="profileData.is_following" v-if="profileData.id != $parent.me.id" :user="profileData"></follow-button>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -89,7 +88,7 @@
             }
         },
         watch: {
-            '$route' (to) {
+            '$route' () {
                 this.fetchTweets();
             }
         }

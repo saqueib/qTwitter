@@ -77,7 +77,7 @@
             return this.$store.getters.me
           },
           openTweetDetail() {
-              return this.$store.getters.openTweetDetails
+            return this.$store.getters.openTweetDetails
           }
         },
         created() {

@@ -1,5 +1,6 @@
 <template>
     <div class="card follow-suggestions">
+
         <header class="card-header">
             <p class="card-header-title">
                 Who to follow
@@ -10,6 +11,7 @@
                        @click.prevent="refresh"> refresh</a>
             </p>
         </header>
+
         <div class="card-content is-transparent" :class="{'is-loading': loading}">
             <article class="media" v-for="user in suggestions" :key="user.id">
                 <figure class="media-left">

@@ -1,19 +1,19 @@
-// get authenticated user
+// Get authenticated user
 export const me = state => state.me
 
-// get user feed
+// Get user feed
 export const feed = state => state.feed
 
 // Get user profile page
 export const profilePage = state => state.profilePage
 
-// get tweet detail
+// Get tweet detail
 export const tweetDetail = state => state.tweetDetail
 
-// get suggest follower count
+// Get suggest follower
 export const followerSuggestions = state => state.followSuggestions
 
-// open tweet details
+// Get open tweet details
 export const openTweetDetails = state => state.openTweetDetails
 
 // Get toggle status of loading

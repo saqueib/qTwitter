@@ -1,7 +1,10 @@
+// Bootstrap the app
 require('./bootstrap');
 
+// Import the Vue
 window.Vue = require('vue');
 
+// Import router and vuex store
 import router from './router'
 import store from './store'
 

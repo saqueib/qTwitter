@@ -1,4 +1,4 @@
-// All of the utilities
+// All utilities
 import http from './http';
 import str from './str';
 
