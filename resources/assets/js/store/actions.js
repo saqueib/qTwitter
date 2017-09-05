@@ -11,8 +11,6 @@ export const loginUser = ({ commit }) => {
 
         commit('ADD_ME', res.data );
         return res.data;
-    }).catch((err) => {
-        console.log(err)
     })
 }
 
@@ -55,22 +53,32 @@ export const getDashboardFeed = ({commit}, pager={}) => {
     })
 }
 
-// Get follow user suggestions
-export const getFollowUserSuggestions = ({commit}, limit) => {
-    let limitQuery = `(first:${limit})`;
+// Post Tweet
+export const postTweet = ({ commit }, body) => {
 
-    let query = `{
-        followSuggestions${limitQuery}
+    let mutation = `mutation {
+        createTweet(body:"${body}")
         {
             id,
-            name,
-            username,
-            avatar
+            body,
+            created_at,
+            replies_count,
+            likes_count,
+            user{
+                id,
+                username,
+                name,
+                avatar
+            }
         }
     }`;
 
-    return http.get( '/graphql?query=' + str.stripLines(query) ).then(function (res) {
-        commit('ADD_FOLLOW_SUGGESTIONS', res.data.data.followSuggestions)
+    return http.get( '/graphql?query=' + mutation ).then((res) => {
+        if(res.data.data.createTweet) {
+            commit('PREPEND_TWEET_IN_FEED', res.data.data.createTweet);
+        }
+
+        return res.data;
     });
 }
 
@@ -122,46 +130,57 @@ export const getTweetsByUsername = ({commit}, username) => {
     })
 }
 
-// Get tweet details with replies
-export const getTweetDetails = ({commit}, options) => {
+// Follow a user
+export const followUser = ({commit}, userId) => {
 
-    let from = options.offset ?  ',offset:' + options.offset : '';
-    let to = options.limit ? 'first:' + options.limit :  'first:26';
-
-    let query = `{
-        tweets(id:${options.id}){
+    let mutation = `mutation {
+        followUser(user_id: ${userId})
+        {
             id,
-            body,
-            created_at,
-            updated_at,
-            replies_count,
-            likes_count,
-            user{
-                id,
-                username,
-                name,
-                avatar,
-                is_following
-            },
-            replies(${to}${from}){
-                body,
-                created_at,
-                user{
-                    username,
-                    name,
-                    avatar,
-                }
-            }
+            name,
+            avatar
         }
     }`;
 
-    let cacheBuster = new Date().getMilliseconds();
+    return http.get( '/graphql?query=' + str.stripLines(mutation) ).then((res) => {
+        commit('INCREMENT_FOLLOW_USER_COUNT');
+    });
+}
 
-    return http.get('/graphql?query=' + str.stripLines(query) + '&t=' + cacheBuster).then(function (res) {
-        commit('ADD_TWEET_DETAIL', res.data.data.tweets[0]);
-        return res.data
-    })
+// Unfollow a user
+export const unFollowUser = ({commit}, userId) => {
 
+    let mutation = `mutation {
+        unFollowUser(user_id: ${userId})
+        {
+            id,
+            name,
+            avatar
+        }
+    }`;
+
+    return http.get( '/graphql?query=' + str.stripLines(mutation) ).then((res) => {
+        commit('DECREMENT_FOLLOW_USER_COUNT');
+    });
+}
+
+// Get follow user suggestions
+export const getFollowUserSuggestions = ({commit}, limit) => {
+    let limitQuery = `(first:${limit})`;
+
+    let query = `{
+        followSuggestions${limitQuery}
+        {
+            id,
+            name,
+            username,
+            avatar
+        }
+    }`;
+
+    return http.get( '/graphql?query=' + str.stripLines(query) ).then(function (res) {
+        commit('ADD_FOLLOW_SUGGESTIONS', res.data.data.followSuggestions)
+    });
 }
 
 // Get followers for a user by username
@@ -215,67 +234,46 @@ export const getFollowUserByUsername = ({commit}, options = {}) => {
     })
 }
 
-// Follow a user
-export const followUser = ({commit}, userId) => {
+// Get tweet details with replies
+export const getTweetDetails = ({commit}, options) => {
 
-    let mutation = `mutation {
-        followUser(user_id: ${userId})
-        {
-            id,
-            name,
-            avatar
-        }
-    }`;
+    let from = options.offset ?  ',offset:' + options.offset : '';
+    let to = options.limit ? 'first:' + options.limit :  'first:26';
 
-    return http.get( '/graphql?query=' + str.stripLines(mutation) ).then((res) => {
-        commit('INCREMENT_FOLLOW_USER_COUNT');
-    });
-}
-
-// Unfollow a user
-export const unFollowUser = ({commit}, userId) => {
-
-    let mutation = `mutation {
-        unFollowUser(user_id: ${userId})
-        {
-            id,
-            name,
-            avatar
-        }
-    }`;
-
-    return http.get( '/graphql?query=' + str.stripLines(mutation) ).then((res) => {
-        commit('DECREMENT_FOLLOW_USER_COUNT');
-    });
-}
-
-// Post Tweet
-export const postTweet = ({ commit }, body) => {
-
-    let mutation = `mutation {
-        createTweet(body:"${body}")
-        {
+    let query = `{
+        tweets(id:${options.id}){
             id,
             body,
             created_at,
+            updated_at,
             replies_count,
             likes_count,
             user{
                 id,
                 username,
                 name,
-                avatar
+                avatar,
+                is_following
+            },
+            replies(${to}${from}){
+                body,
+                created_at,
+                user{
+                    username,
+                    name,
+                    avatar,
+                }
             }
         }
     }`;
 
-    return http.get( '/graphql?query=' + mutation ).then((res) => {
-        if(res.data.data.createTweet) {
-            commit('PREPEND_TWEET_IN_FEED', res.data.data.createTweet);
-        }
+    let cacheBuster = new Date().getMilliseconds();
 
-        return res.data;
-    });
+    return http.get('/graphql?query=' + str.stripLines(query) + '&t=' + cacheBuster).then(function (res) {
+        commit('ADD_TWEET_DETAIL', res.data.data.tweets[0]);
+        return res.data
+    })
+
 }
 
 // Post Reply

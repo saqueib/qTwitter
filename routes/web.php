@@ -23,7 +23,3 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/me', ['middleware' => 'auth', function () {
     return \App\User::withCount('followers', 'following', 'tweets', 'likes')->find( auth()->user()->id );
 }] );
-
-Route::get('/t', function () {
-    return view('profile')->with('token', 'sdsd');
-});

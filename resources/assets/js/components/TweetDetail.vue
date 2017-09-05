@@ -33,7 +33,7 @@
 
                                </article>
                            </div>
-                           <div class="level-right">
+                           <div v-if="me.username != tweetDetails.user.username" class="level-right">
                                <follow-button class="is-outlined" :user="tweetDetails.user" :following="tweetDetails.user.is_following"></follow-button>
                            </div>
                        </div>

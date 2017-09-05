@@ -3,6 +3,11 @@ export const ADD_ME = (state, user) => {
     state.me = user
 }
 
+// Toggle loading
+export const TOGGLE_LOADING = state => {
+    state.isLoading = !state.isLoading
+}
+
 // Add a tweet details
 export const ADD_TWEET_DETAIL = (state, tweet) => {
     state.tweetDetail = tweet;
@@ -22,7 +27,6 @@ export const PROFILE_PAGE = (state, data) => {
 export const ADD_FOLLOW_SUGGESTIONS = (state, data) => {
     state.followSuggestions = data;
 }
-
 
 // Increment follow user
 export const INCREMENT_FOLLOW_USER_COUNT = (state) => {
@@ -83,9 +87,4 @@ export const DELETE_TWEET = (state, tweetId) => {
 // Delete reply
 export const DELETE_REPLY = (state, index) => {
     state.tweetDetail.replies.splice(index, 1);
-}
-
-// Toggle loading
-export const TOGGLE_LOADING = state => {
-    state.isLoading = !state.isLoading
 }

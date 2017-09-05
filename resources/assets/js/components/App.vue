@@ -65,10 +65,6 @@
     import TweetDetail from "./TweetDetail";
     export default {
         components: {TweetDetail},
-        data() {
-          return {
-          }
-        },
         computed: {
           isLoading() {
             return this.$store.getters.isLoading;
